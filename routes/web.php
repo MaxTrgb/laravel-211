@@ -6,6 +6,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'index'])->name('home');
 Route::get('contacts', [MainController::class, 'contacts'])->name('contacts');
 Route::post('send-email', [MainController::class, 'sendEmail'])->name('sendEmail');
+Route::get('category/{category:slug}', function(Category $category) {
+    dd($category);
+});
 
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {

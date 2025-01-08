@@ -1,4 +1,4 @@
-@extends('templates.main')
+@extends('admin.templates.main')
 
 @section('content')
     <h1>Create Category</h1>

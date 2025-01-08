@@ -33,6 +33,11 @@ class DatabaseSeeder extends Seeder
 
         Category::factory()->count(5)->hasProducts(10)->create();
 
-
+        \App\Models\User::factory()->create([
+            'name' => 'name',
+            'email' => 'mail@mail',
+            'password' => bcrypt('12345678'),
+            'role' => 'admin'
+        ]);
     }
 }

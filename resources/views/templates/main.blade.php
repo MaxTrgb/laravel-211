@@ -12,24 +12,51 @@
 
 </head>
 
-<body>
+<body class="bg-dark text-light">
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: black !important;">
+        <div class="container-fluid bg-black">
+            <a class="navbar-brand text-light" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="relative" data-twe-dropdown-ref>
+                <button
+                    class="flex items-center rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+                    type="button" id="dropdownMenuButton1" data-twe-dropdown-toggle-ref aria-expanded="false"
+                    data-twe-ripple-init data-twe-ripple-color="light">
+                    Dropdown button
+                    <span class="ms-2 w-2 [&>svg]:h-5 [&>svg]:w-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </button>
+                <ul class="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-base shadow-lg data-[twe-dropdown-show]:block dark:bg-surface-dark"
+                    aria-labelledby="dropdownMenuButton1" data-twe-dropdown-menu-ref>
+                    @foreach ($categories_share as $category)
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
             <div class="navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
+                        <a class="nav-link active text-white" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('contacts') }}">Contacts</a>
+                        <a class="nav-link active text-white" aria-current="page"
+                            href="{{ route('contacts') }}">Contacts</a>
                     </li>
+
+                    
                 </ul>
             </div>
 
@@ -38,8 +65,9 @@
                     @auth
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
 
-                            @if(Auth::user()->isAdmin())
-                                <a href="{{ route('admin.dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline me-4">Admin Dashboard</a>
+                            @if (Auth::user()->isAdmin())
+                                <a href="{{ route('admin.dashboard') }}"
+                                    class="text-sm text-gray-700 dark:text-gray-500 underline me-4">Admin Dashboard</a>
                             @endif
 
                             <x-dropdown align="right" width="48">
@@ -93,13 +121,9 @@
         </div>
     </nav>
 
-
     <div class="container">
         @yield('content')
     </div>
-
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
