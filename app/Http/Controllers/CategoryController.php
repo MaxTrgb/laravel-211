@@ -31,26 +31,23 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        /*
-        $category = new Category();
-        $category->name = $request->name;
-        $category->description = $request->description;
-        $category->save(); // зберігаємо категорію в базі даних
-        */
+        $imagePath = $request->file('image')
+            ? $request->file('image')->store('categories', 'public')
+            : null;
 
-        $category = Category::create($request->all()); // зберігаємо категорію в базі даних
+        Category::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $imagePath,
+        ]);
 
-        if($request->image){
-            $file = $request->file('image')->store('categories');
-            $category->image = $file;
-            $category->save();
-        }
-        
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with('success', 'Category created successfully!');
     }
+
 
     /**
      * Display the specified resource.
@@ -101,6 +98,6 @@ class CategoryController extends Controller
 
     //     //$category = Category::findOrFail($id);
     //     // dd($category);
-       
+
     // }
 }

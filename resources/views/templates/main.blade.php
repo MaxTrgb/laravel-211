@@ -55,8 +55,14 @@
                         <a class="nav-link active text-white" aria-current="page"
                             href="{{ route('contacts') }}">Contacts</a>
                     </li>
-
-                    
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page"
+                            href="{{ route('products.index') }}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page"
+                            href="{{ route('categories.index') }}">Categories</a>
+                    </li>
                 </ul>
             </div>
 
