@@ -3,24 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class MainController extends Controller
 {
-    public function index() {
-        $title = 'Main Page';
-        $subtitle = '<i>Welcome</i>';
-        $users = [
-            'Fahmi', 'Rifki', 'Rendi', 'Ridwan'
-        ];
-
-        return view('index', compact('title', 'subtitle', 'users'));
+    public function index()
+    {
+        $categories = Category::all();
+        return view('index', compact('categories'));
     }
 
-    public function contacts() {
+
+    public function contacts()
+    {
         return view('client.contacts');
     }
 
-    public function sendEmail(Request $request) {
+    public function sendEmail(Request $request)
+    {
         $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email',
@@ -28,7 +28,7 @@ class MainController extends Controller
         ]);
 
 
-       // dd($request->all());
+        // dd($request->all());
         $name = $request->name;
         $email = $request->email;
         $message = $request->message;
@@ -40,5 +40,4 @@ class MainController extends Controller
 
         // return redirect()->back();
     }
-
 }
