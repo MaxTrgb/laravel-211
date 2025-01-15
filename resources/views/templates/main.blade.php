@@ -40,8 +40,8 @@
                     aria-labelledby="dropdownMenuButton1" data-twe-dropdown-menu-ref>
                     @foreach ($categories_share as $category)
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page"
-                                href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
+                            <a class="nav-link active text-black" aria-current="page"
+                                href="{{ route('shop.category', $category->slug) }}">{{ $category->name }}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -68,6 +68,27 @@
 
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                    <button class="btn btn-primary cart-btn" id="openModal">Cart</button>
+                    <div id="modal"
+                        class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+                        <!-- Modal Content -->
+                        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+                            <h2 class="text-lg font-bold mb-4 text-dark">Modal Title</h2>
+                            <p class="text-gray-600 mb-6">
+                                <div class="cart-body">
+                                    
+                                </div>
+                            </p>
+                            <div class="flex justify-end space-x-2">
+                                <button id="closeModal" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
+                                    Close
+                                </button>
+                                <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                                    Confirm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     @auth
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
 
