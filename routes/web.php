@@ -7,7 +7,6 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +33,7 @@ Route::post('send-email', [MainController::class, 'sendEmail'])->name('sendEmail
 
 Route::get('category/{category:slug}', [ShopController::class, 'category'])->name('shop.category');
 Route::get('product/{product:slug}', [ShopController::class, 'product'])->name('shop.product');
-
+Route::post('/product/{product}/reviews', [ShopController::class, 'storeReview'])->name('reviews.store');
 
 
 Route::middleware('auth')->group(function () {

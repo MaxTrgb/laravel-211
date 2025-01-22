@@ -31,13 +31,17 @@ class DatabaseSeeder extends Seeder
             'description' => 'Description 2'
         ]);*/
 
-        Category::factory()->count(5)->hasProducts(10)->create();
+        // Category::factory()->count(5)->hasProducts(10)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'name',
-            'email' => 'mail@mail',
-            'password' => bcrypt('12345678'),
-            'role' => 'admin'
+        // \App\Models\User::factory()->create([
+        //     'name' => 'name',
+        //     'email' => 'mail@mail',
+        //     'password' => bcrypt('12345678'),
+        //     'role' => 'admin'
+        // ]);
+
+        $this->call([
+            ReviewSeeder::class,
         ]);
     }
 }
