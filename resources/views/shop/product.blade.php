@@ -42,8 +42,7 @@
                 @endforeach
             @endif
         </div>
-
-        <!-- Review form -->
+        
         @auth
             <div class="my-5">
                 <h3>Leave a Review</h3>
