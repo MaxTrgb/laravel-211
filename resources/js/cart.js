@@ -47,3 +47,23 @@ const showCartBody = (cart) => {
     document.querySelector('.cart-body').innerHTML = cart;
     modal.classList.remove('hidden');
 }
+document.querySelectorAll('.update-cart-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        const productId = this.dataset.id;
+        const action = this.dataset.action;
+
+        fetch('/cart/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ id: productId, action: action })
+        })
+            .then(response => response.json())
+            .then(data => {
+                location.reload();
+            })
+            .catch(error => console.error('Error updating cart:', error));
+    });
+});

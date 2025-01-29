@@ -39,6 +39,7 @@ Route::post('/product/{product}/reviews', [ShopController::class, 'storeReview']
 Route::get('cart/add-product/{product}', [CartController::class, 'addProduct'])->name('cart.addProduct');
 Route::delete('cart/remove-product/{product}', [CartController::class, 'removeProduct'])->name('cart.removeProduct');
 Route::delete('cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 
 
 Route::middleware('auth')->group(function () {

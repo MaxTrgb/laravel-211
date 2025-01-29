@@ -20,6 +20,14 @@
                         <td class="py-3 px-4">{{ $product['price'] }}</td>
                         <td class="py-3 px-4">{{ $product['quantity'] }}</td>
                         <td class="py-3 px-4">{{ $product['price'] * $product['quantity'] }}</td>
+                        <td class="py-3 px-4">
+                            <button class="px-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 update-cart-btn"
+                                data-id="{{ $product['id'] }}" data-action="decrease">-</button>
+                            {{ $product['quantity'] }}
+                            <button class="px-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 update-cart-btn"
+                                data-id="{{ $product['id'] }}" data-action="increase">+</button>
+                        </td>
+
                         <td>
                             <button
                                 class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 remove-product-btn"
