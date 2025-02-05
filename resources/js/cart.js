@@ -52,18 +52,12 @@ document.querySelectorAll('.update-cart-btn').forEach(button => {
         const productId = this.dataset.id;
         const action = this.dataset.action;
 
-        fetch('/cart/update', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify({ id: productId, action: action })
-        })
-            .then(response => response.json())
-            .then(data => {
-                location.reload();
+        axios.post('/cart/update', { id: productId, action: action })
+            .then(response => {
+                showCartBody(response.data.cart);
+                document.querySelector('.total-sum').textContent = response.data.totalSum;
             })
             .catch(error => console.error('Error updating cart:', error));
     });
 });
+

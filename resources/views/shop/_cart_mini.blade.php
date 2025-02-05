@@ -1,4 +1,4 @@
-@if (session('cart'))
+@if (isset($cartItems) && $cartItems)
     <div class="bg-gray-800 text-white rounded-lg shadow-lg p-6">
         <table class="w-full table-auto">
             <thead>
@@ -12,26 +12,28 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (session('cart') as $product)
+                @foreach ($cartItems as $product)
                     <tr class="border-b border-gray-700">
-                        <td class="py-3 px-4"><img src="{{ asset($product['img']) }}" alt=""
-                                class="w-16 h-auto"></td>
-                        <td class="py-3 px-4">{{ $product['name'] }}</td>
-                        <td class="py-3 px-4">{{ $product['price'] }}</td>
-                        <td class="py-3 px-4">{{ $product['quantity'] }}</td>
-                        <td class="py-3 px-4">{{ $product['price'] * $product['quantity'] }}</td>
+                        <td class="py-3 px-4"><img src="{{ asset($product['img'] ?? $product->product->image) }}"
+                                alt="" class="w-16 h-auto"></td>
+                        <td class="py-3 px-4">{{ $product['name'] ?? $product->product->name }}</td>
+                        <td class="py-3 px-4">{{ $product['price'] ?? $product->product->price }}</td>
+                        <td class="py-3 px-4">{{ $product['quantity'] ?? $product->quantity }}</td>
+                        <td class="py-3 px-4">
+                            {{ ($product['price'] ?? $product->product->price) * ($product['quantity'] ?? $product->quantity) }}
+                        </td>
                         <td class="py-3 px-4">
                             <button class="px-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 update-cart-btn"
-                                data-id="{{ $product['id'] }}" data-action="decrease">-</button>
-                            {{ $product['quantity'] }}
+                                data-id="{{ $product['id'] ?? $product->product_id }}" data-action="decrease">-</button>
+                            {{ $product['quantity'] ?? $product->quantity }}
                             <button class="px-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 update-cart-btn"
-                                data-id="{{ $product['id'] }}" data-action="increase">+</button>
+                                data-id="{{ $product['id'] ?? $product->product_id }}" data-action="increase">+</button>
                         </td>
 
                         <td>
                             <button
                                 class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 remove-product-btn"
-                                data-id="{{ $product['id'] }}">Remove</button>
+                                data-id="{{ $product['id'] ?? $product->product_id }}">Remove</button>
                         </td>
                     </tr>
                 @endforeach
